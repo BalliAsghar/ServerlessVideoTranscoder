@@ -1,0 +1,86 @@
+{
+   "taskDefinitionArn": "arn:aws:ecs:eu-west-2:214623913683:task-definition/transcode:1",
+   "containerDefinitions": [
+      {
+         "name": "transcoder",
+         "image": "ballihacker/video-transcoder",
+         "cpu": 0,
+         "portMappings": [
+            {
+               "name": "transcoder-80-tcp",
+               "containerPort": 80,
+               "hostPort": 80,
+               "protocol": "tcp",
+               "appProtocol": "http"
+            }
+         ],
+         "essential": true,
+         "environment": [
+            {
+               "name": "S3_SECRET_KEY",
+               "value": "Provide your own"
+            },
+            {
+               "name": "S3_ACCESS_KEY",
+               "value": "Provide your own"
+            },
+            {
+               "name": "S3_UPLOADING_BUCKET",
+               "value": "Provide your own"
+            }
+         ],
+         "environmentFiles": [],
+         "mountPoints": [],
+         "volumesFrom": [],
+         "ulimits": [],
+         "logConfiguration": {
+            "logDriver": "awslogs",
+            "options": {
+               "awslogs-create-group": "true",
+               "awslogs-group": "/ecs/transcode",
+               "awslogs-region": "eu-west-2",
+               "awslogs-stream-prefix": "ecs"
+            },
+            "secretOptions": []
+         }
+      }
+   ],
+   "family": "transcode",
+   "executionRoleArn": "arn:aws:iam::214623913683:role/ecsTaskExecutionRole",
+   "networkMode": "awsvpc",
+   "revision": 3,
+   "volumes": [],
+   "status": "ACTIVE",
+   "requiresAttributes": [
+      {
+         "name": "com.amazonaws.ecs.capability.logging-driver.awslogs"
+      },
+      {
+         "name": "ecs.capability.execution-role-awslogs"
+      },
+      {
+         "name": "com.amazonaws.ecs.capability.docker-remote-api.1.19"
+      },
+      {
+         "name": "com.amazonaws.ecs.capability.docker-remote-api.1.18"
+      },
+      {
+         "name": "ecs.capability.task-eni"
+      },
+      {
+         "name": "com.amazonaws.ecs.capability.docker-remote-api.1.29"
+      }
+   ],
+   "placementConstraints": [],
+   "compatibilities": ["EC2", "FARGATE"],
+   "requiresCompatibilities": ["FARGATE"],
+   "cpu": "1024",
+   "memory": "3072",
+   "runtimePlatform": {
+      "cpuArchitecture": "ARM64",
+      "operatingSystemFamily": "LINUX"
+   },
+   "registeredAt": "2023-09-16T19:33:26.844Z",
+   "registeredBy": "arn:aws:iam::214623913683:root",
+   "tags": []
+}

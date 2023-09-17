@@ -1,0 +1,25 @@
+{
+  "scripts": {
+    "start:dev": "nodemon",
+    "start:prod": "npm run build && node build/index.js",
+    "build": "rimraf ./build && esbuild --bundle --platform=node --target=node18 --outdir=build src/index.ts",
+    "build:image": "docker build -t video-transcoder:latest .",
+    "tag:image": "docker tag video-transcoder:latest ballihacker/video-transcoder:latest",
+    "push:image": "docker push ballihacker/video-transcoder:latest",
+    "image": "npm run build:image && npm run tag:image && npm run push:image",
+    "upload-to-s3": "aws s3 sync ./temp s3://balli-videos/",
+    "delete-from-s3": "aws s3 rm s3://balli-videos/ --recursive"
+  },
+  "devDependencies": {
+    "@types/node": "^20.6.1",
+    "esbuild": "^0.19.3",
+    "nodemon": "^3.0.1",
+    "rimraf": "^5.0.1",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.2.2"
+  },
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.414.0",
+    "winston": "^3.10.0"
+  }
+}

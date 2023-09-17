@@ -1,0 +1,14 @@
+{
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.121",
+    "@types/node": "^20.6.1",
+    "lambda-build": "^1.0.6"
+  },
+  "scripts": {
+    "build": "lambda-build",
+    "deploy": "lambda-build upload Sumbit-ECS-Task -e index.ts -r eu-west-2"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.1459.0"
+  }
+}
